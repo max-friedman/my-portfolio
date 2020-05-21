@@ -32,7 +32,6 @@ var txt = 'Hi, my name is Max./Welcome to my portfolio.';
 var speed = 50;
 
 function typewriter() {
-    console.log("test2");
     if (i < txt.length) {
         if(txt.charAt(i) === "/"){
             document.getElementById("greeting").innerHTML += '<br>';
