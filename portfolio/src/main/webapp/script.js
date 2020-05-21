@@ -25,11 +25,12 @@ function typewriter() {
       }
       ++i;
       setTimeout(typewriter, speed);
+   } else {
+       fadeIn('header');
    }
 }
 
 var cursorAppear = true;
-
 function cursorBlink() {    
   if (cursorAppear) {
       document.getElementById("cursor").style.color = "black";
@@ -37,5 +38,22 @@ function cursorBlink() {
       document.getElementById("cursor").style.color = "#f4efef";
   }
   cursorAppear = !cursorAppear;
-  setTimeout(cursorBlink, 500);
+  setTimeout(cursorBlink, speed*10);
+}
+
+
+function fadeIn(fadeId){
+    document.getElementById(fadeId).style.opacity -= '-.01';
+
+    if(document.getElementById(fadeId).style.opacity != "1"){
+        setTimeout(function(){fadeIn(fadeId)}, 10);
+    }
+}
+
+function fadeOut(fadeId){
+    document.getElementById(fadeId).style.opacity -= '.01';
+
+    if(document.getElementById(fadeId).style.opacity != "0"){
+        setTimeout(function(){fadeOut(fadeId)}, 10);
+    }   
 }
