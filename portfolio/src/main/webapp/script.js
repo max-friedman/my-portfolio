@@ -26,3 +26,32 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+
+var i = 0;
+var txt = 'Hi, my name is Max./Welcome to my portfolio.';
+var speed = 50;
+
+function typewriter() {
+    console.log("test2");
+    if (i < txt.length) {
+        if(txt.charAt(i) === "/"){
+            document.getElementById("greeting").innerHTML += '<br>';
+        } else {
+            document.getElementById("greeting").innerHTML += txt.charAt(i);
+        }
+        ++i;
+        setTimeout(typewriter, speed);
+     }
+}
+
+var cursorAppear = true;
+
+function cursorBlink() {    
+    if (cursorAppear) {
+        document.getElementById("cursor").style.color = "black";
+    } else {
+        document.getElementById("cursor").style.color = "#f4efef";
+    }
+    cursorAppear = !cursorAppear;
+    setTimeout(cursorBlink, 500);
+}
