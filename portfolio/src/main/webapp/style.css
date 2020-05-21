@@ -1,31 +1,9 @@
-* { 
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
 #content {
-  margin: 0;
-  height: 100vh;
-  width: 100%;
-  background-color: #f4efef;
-  font-family: 'Times New Roman', Times, serif;
-  color: black; 
+  margin-left: auto;
+  margin-right: auto;
+  width: 650px;
 }
 
-#greetingWrapper {
-    font-size: 10vh;
-    height: 100%;
-    width: 100%;
-    text-align: center;
-    padding-top: 35vh;
-}
-
-#greeting {
-    display: inline;
-}
-
-#cursor {
-    color: #f4efef;
-    display: inline;
+#greeting-container {
+  margin-top: 20px;
 }
