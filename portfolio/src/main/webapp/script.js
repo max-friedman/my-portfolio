@@ -33,10 +33,10 @@ var speed = 50;
 
 function typewriter() {
   if (i < txt.length) {
-    if(txt.charAt(i) === "/")
+    if(txt.charAt(i) === "/") {
       document.getElementById("greeting").innerHTML += '<br>';
-        } else {
-          document.getElementById("greeting").innerHTML += txt.charAt(i);
+      } else {
+        document.getElementById("greeting").innerHTML += txt.charAt(i);
       }
       ++i;
       setTimeout(typewriter, speed);
