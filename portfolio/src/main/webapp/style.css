@@ -107,7 +107,7 @@
 .entry-bullet {
   padding-left: 20px;
   text-align: left;
-  width: 90%;
+  width: 160%;
   list-style-position: inside;
 }
 
@@ -121,4 +121,20 @@
   position: relative;
   top: -3vh;
   visibility: hidden;
+}
+
+#footer {
+  width: 100%;
+  text-align: center;
+}
+
+#signature {
+  color: gray;
+  font-size: 1.75vh;
+  margin-top: 5vh;
+  padding-bottom: 2vh;
+}
+
+.language {
+  font-weight: bold;
 }
