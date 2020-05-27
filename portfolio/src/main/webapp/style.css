@@ -10,7 +10,7 @@
   height: 100%;
   width: 100%;
   background-color: #f4efef;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Lato';
   color: black; 
 }
 
@@ -21,6 +21,7 @@
   width: 100%;
   padding-top: 1vh;
   background-color: #f4efef;
+  z-index: 100;
 }
 
 #header {
@@ -137,4 +138,16 @@
 
 .language {
   font-weight: bold;
+}
+
+.language:hover {
+  background-image: url("images/paintstroke-lightblue.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.paint {
+  background-image: url("images/paintstroke-blue.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }

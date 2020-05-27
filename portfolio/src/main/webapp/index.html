@@ -4,7 +4,26 @@
     <meta charset="UTF-8">
     <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
     <script src="script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      //On language click
+      $(document).ready(function () {
+        $(".language").click(function () {
+          var languageClass = this.className.split(/\s+/)[1];
+          console.log(languageClass);
+          $("."+languageClass).each(function() {
+            console.log(i + " " + $(this).className);
+            if($(this).hasClass('paint')) {
+              $(this).removeClass('paint');
+            } else {
+              $(this).addClass('paint');
+            }
+          });
+        });
+      });
+    </script>
   </head>
   <body onload="typewriter(); cursorBlink();">
     <div id="content">
@@ -145,7 +164,7 @@
                   Managed a group of interns leading to the development of over 30 web scrapers, using <span class="language golang">Golang</span>, more than quadrupling content on the website
                 </li>
                 <li class="entry-bullet entry-content">
-                  Overhauled database by implementing AWS S3 hosting to boost efficiency of storing and retrieving media
+                  Overhauled database by implementing <span class="language aws">AWS S3</span> hosting to boost efficiency of storing and retrieving media
                 </li>
               </ul>
             </td>
@@ -208,7 +227,8 @@
             <td>
               <ul>
                 <li class="entry-bullet entry-content">
-                  Used various <span class="language api">APIs</span>, <span class="language jdbc">JDBC</span>, <span class="language sql">SQL</span>, and <span class="language mysql">MySQL</span> to create backend and database for a web app that finds overlapping free times for 2+ people                      </li>
+                  Used various <span class="language api">APIs</span>, <span class="language jdbc">JDBC</span>, <span class="language sql">SQL</span>, and <span class="language mysql">MySQL</span> to create backend and database for a web app that finds overlapping free times for 2+ people
+                </li>
                 <li class="entry-bullet entry-content">
                   Authenticated users through <span class="language api">Google Login and Calendar APIs</span>, storing their calendar information in a readable and easily parsable format
                 </li>
@@ -394,14 +414,16 @@
           <!-- Proficient -->
           <tr>
             <td class="entry-position entry-content">
-              Proficient in C++, Golang, Java, Javascript, HTML, CSS, Embedded SQL, MVC Architecture, MySQL, JDBC, Servlets and JSP, AJAX, Multithreading, Concurrency, Plan Based and Agile SWE, Web Sockets. 
+              Proficient in <span class="language c++">C++</span>, <span class="language golang">Golang</span>, <span class="language java">Java</span>, <span class="language javascript">Javascript</span>, <span class="language html">HTML</span>,
+              <span class="language css">CSS</span>, <span class="language sql">SQL</span>, MVC Architecture, <span class="language mysql">MySQL</span>, <span class="language jdbc">JDBC</span>, Servlets and JSP, 
+              AJAX, Multithreading, Concurrency, Plan Based and Agile SWE, Web Sockets. 
             </td>
           </tr>
 
           <!-- Learning -->
           <tr>
             <td class="entry-position entry-content">
-              Learning about Python, Swift, AWS, Computer Vision, Arduino, Raspberry Pi, SQL, Dart.
+              Learning about Python, <span class="language swift">Swift</span>, <span class="language aws">AWS</span>, Computer Vision, Arduino, Raspberry Pi, Dart.
             </td>
           </tr>
         </table>
