@@ -14,7 +14,6 @@
           var languageClass = this.className.split(/\s+/)[1];
           console.log(languageClass);
           $("."+languageClass).each(function() {
-            console.log(i + " " + $(this).className);
             if($(this).hasClass('paint')) {
               $(this).removeClass('paint');
             } else {
