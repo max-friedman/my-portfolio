@@ -43,17 +43,20 @@ function cursorBlink() {
 
 
 function fadeIn(fadeId){
-    document.getElementById(fadeId).style.opacity -= '-.01';
+  document.getElementById(fadeId).style.display = "";
+  document.getElementById(fadeId).style.opacity -= '-.01';
 
-    if(document.getElementById(fadeId).style.opacity != "1"){
-        setTimeout(function(){fadeIn(fadeId)}, 10);
+  if(document.getElementById(fadeId).style.opacity < "1"){
+    setTimeout(function(){fadeIn(fadeId)}, 10);
     }
 }
 
 function fadeOut(fadeId){
-    document.getElementById(fadeId).style.opacity -= '.01';
+  document.getElementById(fadeId).style.opacity -= '.01';
 
-    if(document.getElementById(fadeId).style.opacity != "0"){
-        setTimeout(function(){fadeOut(fadeId)}, 10);
-    }   
+  if(document.getElementById(fadeId).style.opacity > "0"){
+      setTimeout(function(){fadeOut(fadeId)}, 10);
+    } else {
+    document.getElementById(fadeId).style.display = "none";
+    }  
 }
