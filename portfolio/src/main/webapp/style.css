@@ -9,9 +9,9 @@
   margin: 0;
   height: 100%;
   width: 100%;
-  background-color: #f4efef;
+  background-color: #002b36;
   font-family: 'Lato';
-  color: black; 
+  color: #839496; 
 }
 
 #header-container {
@@ -21,17 +21,16 @@
   left: 0px;
   width: 100%;
   padding-top: 1vh;
-  background-color: #f4efef;
   z-index: 100;
   box-shadow: 0 0px 6px rgba(0,0,0,0.16), 0 0px 6px rgba(0,0,0,0.23);
   padding-bottom: 1vh;
+  background-color: inherit;
 }
 
 #header {
   margin-left: auto;
   margin-right: auto;
   font-size: 3vh;
-  color: gray; 
   opacity: 0;
 }
 
@@ -46,7 +45,7 @@
 
 #header td a{
   text-decoration: none;
-  color: gray;
+  color: inherit;
 }
 
 #greeting-container {
@@ -63,12 +62,11 @@
 }
 
 #cursor {
-  color: #f4efef;
+  color: #839496;
   display: inline;
 }
 
 .section-container {
-  color: #696969;
   width: 100%;
   padding-top: 5vh;
   padding-left: 5vw;
@@ -88,8 +86,9 @@
 }
 
 .entry-header {
-  font-size: 3vh;
+  font-size: 5vh;
   padding-top: 10vh;
+  vertical-align: top;
 }
 
 .entry-title {
@@ -103,7 +102,7 @@
 }
 
 .entry-content {
-  font-size: 2vh;
+  font-size: 3vh;
 }
 
 .entry-positon {
@@ -152,7 +151,7 @@
 }
 
 .paint {
-  background-image: url("images/paintstroke-blue.png");
+  background-image: url("images/paintstroke-black.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
@@ -167,10 +166,12 @@
   height: 25vh;
   width: 90%;
   background: #ffffff;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  /* box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); */
   margin: 2%;
   position: relative;
   text-align: center;
+  box-shadow: 0 4px 80px #070509;
+  border-radius: 16px;
 }
 
 .logo {
@@ -184,26 +185,24 @@
   padding-top: 3vh;
 }
 
-.entry-info-left {
+.entry-info {
   width: 50vw;
   height: 100vh;
   position: fixed;
   top: 0px;
-  left: 0px;
-  background-color: #eae1e1;
+  background-color: #073642;
   display: none;
   box-shadow: 0 0px 6px rgba(0,0,0,0.16), 0 0px 6px rgba(0,0,0,0.23);
+  padding-left: 3vw;
+  padding-right: 3vw;
+}
+
+.entry-info-left {
+  left: 0vw;
 }
 
 .entry-info-right {
-  width: 50vw;
-  height: 100vh;
-  position: fixed;
-  top: 0px;
   left: 50vw;
-  background-color: #eae1e1;
-  display: none;
-  box-shadow: 0 0px 6px rgba(0,0,0,0.16), 0 0px 6px rgba(0,0,0,0.23);
 }
 
 .entry-skills {
