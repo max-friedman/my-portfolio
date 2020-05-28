@@ -10,7 +10,7 @@
   height: 100%;
   width: 100%;
   background-color: #f4efef;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Lato';
   color: black; 
 }
 
@@ -21,6 +21,7 @@
   width: 100%;
   padding-top: 1vh;
   background-color: #f4efef;
+  z-index: 100;
 }
 
 #header {
@@ -32,17 +33,17 @@
 }
 
 #header td {
-    text-align: center;
-    padding-right: 5vw;
+  text-align: center;
+  padding-right: 5vw;
 }
 
 #header td:nth-of-type(5) {
-    padding-right: 0vw;
+  padding-right: 0vw;
 }
 
 #header td a{
-    text-decoration: none;
-    color: gray;
+  text-decoration: none;
+  color: gray;
 }
 
 #greeting-container {
@@ -64,54 +65,143 @@
 }
 
 .section-container {
-   color: #696969;
-   width: 100%;
-   padding-top: 5vh;
-   padding-left: 5vw;
-   padding-right: 5vw;
+  color: #696969;
+  width: 100%;
+  padding-top: 5vh;
+  padding-left: 5vw;
+  padding-right: 5vw;
 }
 
 .section-table{
-    table-layout: fixed;
-    width: 100%;
+  table-layout: fixed;
+  width: 100%;
 }
 
 .section-header {
-    font-weight: bold;
-    font-size: 4vh;
+  font-weight: bold;
+  font-size: 4vh;
+  text-align: left !important;
+  padding-bottom: 1vh;
 }
 
 .entry-header {
-    font-size: 3vh;
-    padding-top: 2vh;
+  font-size: 3vh;
+  padding-top: 10vh;
 }
 
 .entry-title {
-    text-align: left;
-    width: 90%;
+  text-align: left;
+  width: 60%;
 }
 
 .entry-location {
-    text-align: right;
-    width: 10;
+  text-align: right;
+  width: 10;
 }
 
 .entry-content {
-    font-size: 2vh;
+  font-size: 2vh;
 }
 
 .entry-positon {
-    font-style: italic;
+  font-style: italic;
 }
 
 .entry-bullet {
-    padding-left: 20px;
-    text-align: left;
-    width: 90%;
-    list-style-position: inside;
+  padding-left: 20px;
+  text-align: left;
+  width: 160%;
+  list-style-position: inside;
 }
 
 .entry-date {
-    text-align: right;
-    width: 10%;
+  text-align: right;
+  width: 10%;
+}
+
+.anchor {
+  display: block;
+  position: relative;
+  top: -5vh;
+  visibility: hidden;
+}
+
+#footer {
+  width: 100%;
+  text-align: center;
+}
+
+#signature {
+  color: gray;
+  font-size: 1.75vh;
+  margin-top: 5vh;
+  padding-bottom: 2vh;
+}
+
+.language {
+  font-weight: bold;
+}
+
+.language:hover {
+  background-image: url("images/paintstroke-lightblue.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.paint {
+  background-image: url("images/paintstroke-blue.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+#tile-table td{
+  width: 50vw;
+  text-align: center;
+}
+
+.entry-tile {
+  display: inline-block;
+  height: 25vh;
+  width: 90%;
+  background: #ffffff;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  margin: 2%;
+  position: relative;
+  text-align: center;
+}
+
+.logo {
+  display: inline-block;
+  object-fit: contain;
+  width: 35vw;
+  height: 20vh;
+}
+
+.entry-info-left {
+  width: 50vw;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: #eae1e1;
+  display: none;
+  box-shadow: 0 0px 6px rgba(0,0,0,0.16), 0 0px 6px rgba(0,0,0,0.23);
+}
+
+.entry-info-right {
+  width: 50vw;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  left: 50vw;
+  background-color: #eae1e1;
+  display: none;
+  box-shadow: 0 0px 6px rgba(0,0,0,0.16), 0 0px 6px rgba(0,0,0,0.23);
+}
+
+.entry-skills {
+  position: absolute;
+  bottom: 10px;
+  text-align: center;
+  width: 100%;
 }

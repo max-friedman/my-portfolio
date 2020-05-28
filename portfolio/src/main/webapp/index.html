@@ -4,7 +4,41 @@
     <meta charset="UTF-8">
     <title>My Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet'>
     <script src="script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      //On language click
+      $(document).ready(function () {
+        $(".language").click(function () {
+          var languageClass = this.className.split(/\s+/)[1];
+          console.log(languageClass);
+          $("."+languageClass).each(function() {
+            if($(this).hasClass('paint')) {
+              $(this).removeClass('paint');
+            } else {
+              $(this).addClass('paint');
+            }
+          });
+        });
+      });
+
+      //On entry mouseenter
+      $(document).ready(function () {
+        $(".entry-tile").mouseenter(function () {
+          var infoName = $(this).attr("data-revealinfo");
+          $("#"+infoName).css("display", "block");
+        });
+      });
+
+      //On entry mouseleave
+      $(document).ready(function () {
+        $(".entry-tile").mouseleave(function () {
+          var infoName = $(this).attr("data-revealinfo");
+          $("#"+infoName).css("display", "none");
+        });
+      });
+    </script>
   </head>
   <body onload="typewriter(); cursorBlink();">
     <div id="content">
@@ -12,11 +46,11 @@
       <div id="header-container" class="fadein">
         <table id="header">
           <tr>
-            <td><a href="#education">Education</a></td>
-            <td><a href="#experience">Experience</a></td>
-            <td><a href="#projects">Projects</a></td>
-            <td><a href="#leadership">Leadership</a></td>
-            <td><a href="#skills">Skills</a></td>
+            <td><a href="#education-anchor">Education</a></td>
+            <td><a href="#experience-anchor">Experience</a></td>
+            <td><a href="#projects-anchor">Projects</a></td>
+            <td><a href="#leadership-anchor">Leadership</a></td>
+            <td><a href="#skills-anchor">Skills</a></td>
           </tr>
         </table>
       </div>
@@ -25,351 +59,561 @@
         <div id="greeting"></div><div id="cursor">|</div>
       </div>
 
-      <!-- Education -->
-      <div id="education-container" class="section-container" name="education">
-          <table id="education" class="section-table">
-              <tr>
-                  <td class="section-header">
-                      Education
-                  </td>
-              </tr>
+      <a class="anchor" name="skills-anchor"></a>
+      <!-- Skills -->
+      <div id="skills-container" class="section-container" name="skills">
+        <table id="skills" class="section-table">
+          <tr>
+            <td class="section-header">
+              Skills
+            </td>
+          </tr>
 
-              <!-- USC -->
-              <tr>
-                  <td class="entry-title entry-header">
-                      University of Southern California, Viterbi School of Engineering
-                  </td>
-                  <td class="entry-location entry-header">
-                      Los Angeles, CA
-                  </td>
-              </tr>
-              <tr>
-                  <td class="entry-position entry-content">
-                      Bachelor of Science in Computer Science and Business Administration
-                  </td>
-                  <td class="entry-date entry-content">
-                      Aug 2018 – May 2022
-                  </td>
-              </tr>
-              <tr>
-                  <td class="entry-bullet entry-content">
-                      Relevant Coursework: Data Structures and Algorithms, Linear Algebra, Software Development, Algorithms and Theory of Computing
-                  </td>
-                  <td class="entry-date entry-content">
-                      GPA: 3.95
-                  </td>
-              </tr>
-              <tr>
-                  <td class="entry-bullet entry-content">
-                      Honors: W.V.T. Rusch Undergraduate Engineering Honors, Dean’s List (All Semesters), Alpha Lambda Delta Nominee
-                  </td>
-              </tr>
+          <!-- Proficient -->
+          <tr>
+            <td class="entry-position entry-content">
+              Proficient in <span class="language c">C++</span>, <span class="language golang">Golang</span>, <span class="language java">Java</span>, <span class="language javascript">Javascript</span>, <span class="language html">HTML</span>,
+              <span class="language css">CSS</span>, <span class="language sql">SQL</span>, MVC Architecture, <span class="language mysql">MySQL</span>, <span class="language jdbc">JDBC</span>, Servlets and JSP, 
+              AJAX, Multithreading, Concurrency, Plan Based and Agile SWE, Web Sockets. 
+            </td>
+          </tr>
 
-              <!-- Richmond -->
-              <tr>
-                  <td class="entry-title entry-header">
-                      Richmond the American International University
-                  </td>
-                  <td class="entry-location entry-header">
-                      London, United Kingdom
-                  </td>
-              </tr>
-              <tr>
-                  <td class="entry-position entry-content">
-                      USC Study Abroad                  
-                  </td>
-                  <td class="entry-date entry-content">
-                      Aug 2018 – Dec 2018
-                  </td>
-              </tr>
-          </table>
+          <!-- Learning -->
+          <tr>
+            <td class="entry-position entry-content">
+              Learning about Python, <span class="language swift">Swift</span>, <span class="language aws">AWS</span>, Computer Vision, Arduino, Raspberry Pi, Dart.
+            </td>
+          </tr>
+        </table>
       </div>
 
-      <!-- Experience -->
-      <div id="experience-container" class="section-container" name="experience">
-          <table id="experience" class="section-table">
-              <tr>
-                  <td class="section-header">
-                      Experience
-                  </td>
-              </tr>
+      <div class="section-container">
+        <table id="tile-table">
+          <!-- EDUCATION -->
+          <tr>
+            <td class="section-header">
+              <a class="anchor" name="education-anchor"></a>
+              Education
+            </td>
+          </tr>
+          <!-- Ecucation Row 1 -->
+          <tr>
+            <!-- USC -->
+            <td>
+              <div class="entry-tile" data-revealInfo="usc-info">
+                <img class="logo" src='images/usc-logo.png' style="height: auto; padding-top: 3vh;">
+              </div>
+            </td>
+            <!-- Richmond -->
+            <td>
+              <div class="entry-tile" data-revealInfo="richmond-info">
+                <img class="logo" src='images/richmond-logo.jpg' style="padding-top: 2.5vh;">
+              </div>
+            </td>
+          </tr>
+          <!-- EXPERIENCE -->
+          <tr>
+            <td class="section-header">
+              <a class="anchor" name="experience-anchor"></a>
+              Experience
+            </td>
+          </tr>
+          </tr>
+          <!-- Experience Row 1 -->
+          <tr>
+            <!-- Google -->
+            <td>
+              <div class="entry-tile" data-revealInfo="google-info">
+                <img class="logo" src='images/google-logo.jpg'>
+                <div class="entry-skills">
+                  <span class="language html">HTML</span>, <span class="language css">CSS</span>, 
+                  <span class="language javascript">Javascript</span>
+                </div>
+              </div>
+            </td>
+            <!-- Overlooked -->
+            <td>
+              <div class="entry-tile" data-revealInfo="overlooked-info">
+                <img class="logo" src='images/overlooked-logo.png' style="height: auto; width: auto; padding-top: 7vh;">
+                <div class="entry-skills">
+                  <span class="language golang">Golang</span>, <span class="language aws">AWS</span>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <!-- Experience Row 2 -->
+          <tr>
+            <!-- WireCash -->
+            <td>
+              <div class="entry-tile" data-revealInfo="wirecash-info">
+                <img class="logo" src='images/wirecash-logo.jpg' style="padding-top: 3vh">
+                <div class="entry-skills">
+                  <span class="language api">APIs</span>, <span class="language java">Java</span>
+                </div>
+              </div>
+            </td>
+          </tr>
 
-              <!-- Google -->
-              <tr>
-                  <td class="entry-title entry-header">
-                      Google
-                  </td>
-                  <td class="entry-location entry-header">
-                      Los Angeles, CA
-                  </td>
-              </tr>
-              <tr>
-                  <td class="entry-position entry-content">
-                      STEP Intern
-                  </td>
-                  <td class="entry-date entry-content">
-                      May 2020 – Aug 2020
-                  </td>
-              </tr>
+          <!-- PROJECTS -->
+          <tr>
+            <td class="section-header">
+              <a class="anchor" name="projects-anchor"></a>
+              Projects
+            </td>
+          </tr>
+          </tr>
+          <!-- Projects Row 1 -->
+          <tr>
+            <!-- Rendezvous -->
+            <td>
+              <div class="entry-tile" data-revealInfo="rendezvous-info">
+                <img class="logo" src='images/rendezvous-logo.png' style="height: auto; padding-top: 2vh; margin-left: -1vw;">
+                <div class="entry-skills">
+                  <span class="language api">APIs</span>, <span class="language jdbc">JDBC</span>, 
+                  <span class="language sql">SQL</span>, <span class="language mysql">MySQL</span>
+                </div>
+              </div>
+            </td>
+            <!-- SalEats -->
+            <td>
+              <div class="entry-tile" data-revealInfo="saleats-info">
+                <img class="logo" src='images/saleats-logo.png'>
+                <div class="entry-skills">
+                  <span class="language api">APIs</span>, <span class="language jdbc">JDBC</span>, 
+                  <span class="language sql">SQL</span>, <span class="language mysql">MySQL</span>,
+                  <span class="language html">HTML</span>, <span class="language css">CSS</span>, 
+                  <span class="language javascript">Javascript</span>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <!-- Projects Row 2 -->
+          <tr>
+            <!-- Tap -->
+            <td>
+              <div class="entry-tile" data-revealInfo="tap-info">
+                <img class="logo" src='images/tap-logo.png' style="height: 80%; width: auto;">
+                <div class="entry-skills">
+                  <span class="language c">C++</span>
+                </div>
+              </div>
+            </td>
+            <!-- Dine 'n' Dash -->
+            <td>
+              <div class="entry-tile" data-revealInfo="dinendash-info">
+                <img class="logo" src='images/dinendash-logo.png' style="">
+                <div class="entry-skills">
+                  <span class="language swift">Swift</span>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <!-- Projects Row 3 -->
+          <tr>
+            <!-- Boeing Design Challenge -->
+            <td>
+              <div class="entry-tile" data-revealInfo="boeing-info">
+                <img class="logo" src='images/boeing-logo.png' style="padding-top: 3vh;">
+              </div>
+            </td>
+          </tr>
 
-              <!-- Overlooked -->
-              <tr>
-                  <td class="entry-title entry-header">
-                      Overlooked
-                  </td>
-                  <td class="entry-location entry-header">
-                      Los Angeles, CA
-                  </td>
+          <!-- LEADERSHIP -->
+          <tr>
+            <td class="section-header">
+              <a class="anchor" name="leadership-anchor"></a>
+              Leadership
+            </td>
+          </tr>
+          <!-- Leadership Row 1 -->
+          <tr>
+            <!-- Makers -->
+            <td>
+              <div class="entry-tile" data-revealInfo="makers-info">
+                <img class="logo" src='images/makers-logo.png' style="">
+                <div class="entry-skills">
+                  <span class="language api">APIs</span>, <span class="language javascript">Javascript</span> 
+                </div>
+              </div>
+            </td>
+            <!-- TAMID -->
+            <td>
+              <div class="entry-tile" data-revealInfo="tamid-info">
+                <img class="logo" src='images/tamid-logo.svg' style="padding-top: 3vh;">
+              </div>
+            </td>
+          </tr>
+        </table>
+        
+
+
+        <!-- DETAILS -->
+        <!-- Google -->
+        <div class="entry-info-right" id='google-info'>
+          <table class="section-table">
+            <tr>
+              <td class="entry-title entry-header">
+                Google
+              </td>
+              <td class="entry-location entry-header">
+                Los Angeles, CA
+              </td>
+            </tr>
+            <tr>
+              <td class="entry-position entry-content">
+                STEP Intern
+              </td>
+              <td class="entry-date entry-content">
+                May 2020 – Aug 2020
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Overlooked -->
+        <div class="entry-info-left" id='overlooked-info'>
+          <table class="section-table">
+            <tr>
+                <td class="entry-title entry-header">
+                  Overlooked
+                </td>
+                <td class="entry-location entry-header">
+                  Los Angeles, CA
+                </td>
               </tr>
               <tr>
-                  <td class="entry-position entry-content">
-                      Full-Stack Developer Intern
-                  </td>
-                  <td class="entry-date entry-content">
-                      May 2019 – Aug 2019
-                  </td>
+                <td class="entry-position entry-content">
+                  Full-Stack Developer Intern
+                </td>
+                <td class="entry-date entry-content">
+                  May 2019 – Aug 2019
+                </td>
               </tr>
-            <tr> 
+              <tr> 
                 <td>
                   <ul>
-                      <li class="entry-bullet entry-content">
-                        Worked directly with founders pitching features to drive user engagement and increasing profitability
-                      </li>
-                      <li class="entry-bullet entry-content">
-                          Managed a group of interns leading to the development of over 30 web scrapers, using Golang, more than quadrupling content on the website
-                      </li>
-                      <li class="entry-bullet entry-content">
-                          Overhauled database by implementing AWS S3 hosting to boost efficiency of storing and retrieving media
-                      </li>
-                  </ul>
+                    <li class="entry-bullet entry-content">
+                      Worked directly with founders pitching features to drive user engagement and increasing profitability
+                    </li>
+                    <li class="entry-bullet entry-content">
+                      Managed a group of interns leading to the development of over 30 web scrapers, using <span class="language golang">Golang</span>, more than quadrupling content on the website
+                    </li>
+                    <li class="entry-bullet entry-content">
+                      Overhauled database by implementing <span class="language aws">AWS S3</span> hosting to boost efficiency of storing and retrieving media
+                    </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- WireCash -->
+        <div class="entry-info-right" id='wirecash-info'>
+          <table class="section-table">
+            <tr>
+              <td class="entry-title entry-header">
+                WireCash
+              </td>
+              <td class="entry-location entry-header">
+                Santa Monica, CA
+              </td>
+            </tr>
+            <tr>
+              <td class="entry-position entry-content">
+                Intern
+              </td>
+              <td class="entry-date entry-content">
+                Jun 2017 – Aug 2017
+              </td>
+            </tr>
+            <tr> 
+              <td>
+                <ul>
+                  <li class="entry-bullet entry-content">
+                    Conceptualized and programmed an <span class="language api">API</span> for customer support in <span class="language java">Java</span>, reducing service calls by 10%
+                  </li>
+                  <li class="entry-bullet entry-content">
+                    Created various interfaces enabling users to initiate remittances through a bot by automating the process                      </li>
+                  <li class="entry-bullet entry-content">
+                    Developed a system increasing marketing reach by posting transfer rates on websites used to compare fees from various wire transferring firms
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- USC -->
+        <div class="entry-info-right" id='usc-info'>
+          <table class="section-table">
+            <tr>
+              <td class="entry-title entry-header">
+                University of Southern California, Viterbi School of Engineering and Marshall School of Business
+              </td>
+              <td class="entry-location entry-header">
+                Los Angeles, CA
+              </td>
+            </tr>
+            <tr>
+              <td class="entry-position entry-content">
+                Bachelor of Science in Computer Science and Business Administration
+              </td>
+              <td class="entry-date entry-content">
+                Aug 2018 – May 2022
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <ul class="entry-bullet entry-content">
+                  Relevant Coursework: Data Structures and Algorithms, Linear Algebra, Software Development, Algorithms and Theory of Computing
+                </ul>
+              </td>
+              <td class="entry-date entry-content">
+                GPA: 3.95
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <ul class="entry-bullet entry-content">
+                  Honors: W.V.T. Rusch Undergraduate Engineering Honors, Dean’s List (All Semesters), Alpha Lambda Delta Nominee
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Richmond -->
+        <div class="entry-info-left" id='richmond-info'>
+          <table class="section-table">
+            <tr>
+              <td class="entry-title entry-header">
+                Richmond the American International University
+              </td>
+              <td class="entry-location entry-header">
+                London, United Kingdom
+              </td>
+            </tr>
+            <tr>
+              <td class="entry-position entry-content">
+                USC Study Abroad                  
+              </td>
+              <td class="entry-date entry-content">
+                Aug 2018 – Dec 2018
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Rendezvous -->
+        <div class="entry-info-right" id='rendezvous-info'>
+          <table class="section-table">
+            <tr>
+              <td class="entry-title entry-header">
+                Rendezvous
+              </td>
+              <td class="entry-location entry-header">
+                May 2020
+              </td>
+            </tr>
+            <tr> 
+              <td>
+                <ul>
+                  <li class="entry-bullet entry-content">
+                    Used various <span class="language api">APIs</span>, <span class="language jdbc">JDBC</span>, <span class="language sql">SQL</span>, and <span class="language mysql">MySQL</span> to create backend and database for a web app that finds overlapping free times for 2+ people
+                  </li>
+                  <li class="entry-bullet entry-content">
+                    Authenticated users through <span class="language api">Google Login and Calendar APIs</span>, storing their calendar information in a readable and easily parsable format
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- SalEats -->
+        <div class="entry-info-left" id='saleats-info'>
+          <table class="section-table">
+            <tr>
+              <td class="entry-title entry-header">
+                SalEats
+              </td>
+              <td class="entry-location entry-header">
+                April 2020
+              </td>
+            </tr>
+            <tr> 
+              <td>
+                <ul>
+                  <li class="entry-bullet entry-content">
+                    Built a website allowing users to search for restaurants, add to list of favorites, and schedule reservations on their personal Google calendars                      </li>
+                  <li class="entry-bullet entry-content">
+                    Used <span class="language api">Yelp and Google Calendar APIs</span> to automate process of retrieving restaurant information and storing reservations
+                  </li>
+                  <li class="entry-bullet entry-content">
+                    Created a database using <span class="language sql">SQL</span> and <span class="language mysql">MySQL</span> to store user information and corresponding favorites, accessed it using JDBC
+                  </li>
+                  <li class="entry-bullet entry-content">
+                    Designed and implemented a UI from scratch using <span class="language html">HTML</span>, <span class="language css">CSS</span>, and <span class="language javascript">Javascript</span> to maximize ease of use
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Tap -->
+        <div class="entry-info-right" id='tap-info'>
+          <table class="section-table">
+            <tr>
+              <td class="entry-title entry-header">
+                Tap
+              </td>
+              <td class="entry-location entry-header">
+                April 2017
                 </td>
             </tr>
-            <!-- WireCash -->
+            <tr> 
+              <td>
+                <ul>
+                  <li class="entry-bullet entry-content">
+                    Grand Prize Winner at LA Hacks 2017
+                  </li>
+                  <li class="entry-bullet entry-content">
+                    Conceptualized and constructed a device that turns any surface into a touch screen for any device using piezoelectric sensors, an Arduino, and multilateration code written in <span class="language c">C++</span>
+                  </li>
+                  <li class="entry-bullet entry-content">
+                    Competed against over 1000 graduate and undergraduate university students as a Junior in high school
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Dine 'n' Dash -->
+        <div class="entry-info-left" id='dinendash-info'>
+          <table class="section-table">
             <tr>
-                  <td class="entry-title entry-header">
-                      WireCash
-                  </td>
-                  <td class="entry-location entry-header">
-                      Santa Monica, CA
-                  </td>
-              </tr>
-              <tr>
-                  <td class="entry-position entry-content">
-                      Intern
-                  </td>
-                  <td class="entry-date entry-content">
-                      Jun 2017 – Aug 2017
-                  </td>
-              </tr>
-              <tr> 
-                <td>
-                  <ul>
-                      <li class="entry-bullet entry-content">
-                        Conceptualized and programmed an API for customer support in Java, reducing service calls by 10%
-                      </li>
-                      <li class="entry-bullet entry-content">
-                        Created various interfaces enabling users to initiate remittances through a bot by automating the process                      </li>
-                      <li class="entry-bullet entry-content">
-                        Developed a system increasing marketing reach by posting transfer rates on websites used to compare fees from various wire transferring firms
-                      </li>
-                  </ul>
-                </td>
-              </tr>
+              <td class="entry-title entry-header">
+                Dine 'n' Dash
+              </td>
+              <td class="entry-location entry-header">
+                April 2018
+              </td>
+            </tr>
+            <tr> 
+              <td>
+                <ul>
+                  <li class="entry-bullet entry-content">
+                    1 of 30 finalists out of 1,100 companies in Founder’s Bootcamp Start-up Accelerator
+                  </li>
+                  <li class="entry-bullet entry-content">
+                    Built an app in <span class="language swift">Swift</span> for customers to order food at restaurants from their phones
+                  </li>
+                  <li class="entry-bullet entry-content">
+                    Received and applied feedback from over ten restaurants in Greater Los Angeles Area
+                  </li>
+                </ul>
+              </td>
+            </tr>
           </table>
-      </div>
-      
-      <!-- Projects -->
-      <div id="projects-container" class="section-container" name="projects">
-          <table id="projects" class="section-table">
-              <tr>
-                  <td class="section-header">
-                      Projects
-                  </td>
-              </tr>
+        </div>
 
-              <!-- Rendezvous -->
-              <tr>
-                  <td class="entry-title entry-header">
-                      Rendezvous
-                  </td>
-                  <td class="entry-location entry-header">
-                      May 2020
-                  </td>
-              </tr>
-              <tr> 
-                <td>
-                  <ul>
-                      <li class="entry-bullet entry-content">
-                        Used various APIs, JDBC, SQL, and MySQL to create backend and database for a web app that finds overlapping free times for 2+ people                      </li>
-                      <li class="entry-bullet entry-content">
-                        Authenticated users through Google Login and Calendar APIs, storing their calendar information in a readable and easily parsable format
-                      </li>
-                  </ul>
-                </td>
-              </tr>
-
-              <!-- SalEats -->
-              <tr>
-                  <td class="entry-title entry-header">
-                      SalEats
-                  </td>
-                  <td class="entry-location entry-header">
-                      April 2020
-                  </td>
-              </tr>
-              <tr> 
-                <td>
-                  <ul>
-                      <li class="entry-bullet entry-content">
-                        Built a website allowing users to search for restaurants, add to list of favorites, and schedule reservations on their personal Google calendars                      </li>
-                      <li class="entry-bullet entry-content">
-                        Used Yelp and Google Calendar APIs to automate process of retrieving restaurant information and storing reservations
-                      </li>
-                      <li class="entry-bullet entry-content">
-                        Created a database using SQL and MySQL to store user information and corresponding favorites, accessed it using JDBC
-                      </li>
-                      <li class="entry-bullet entry-content">
-                        Designed and implemented a UI from scratch using HTML, CSS, and Javascript to maximize ease of use
-                      </li>
-                  </ul>
-                </td>
-              </tr>
-
-              <!-- Boeing Design Challenge -->
-              <tr>
-                  <td class="entry-title entry-header">
-                      Boeing Design Challenge
-                  </td>
-                  <td class="entry-location entry-header">
-                      February 2019
-                  </td>
-              </tr>
-              <tr> 
-                <td>
-                  <ul>
-                      <li class="entry-bullet entry-content">
-                        1 of 5 finalists out of 40 teams
-                      </li>
-                      <li class="entry-bullet entry-content">
-                        Designed a plan for a spacecraft to retrieve an asteroid in 90 minutes and presented in front of Boeing VPs
-                      </li>
-                  </ul>
-                </td>
-              </tr>
-
-              <!-- Dine 'n' Dash -->
-              <tr>
-                  <td class="entry-title entry-header">
-                      Dine 'n' Dash
-                  </td>
-                  <td class="entry-location entry-header">
-                      April 2018
-                  </td>
-              </tr>
-              <tr> 
-                <td>
-                  <ul>
-                      <li class="entry-bullet entry-content">
-                        1 of 30 finalists out of 1,100 companies in Founder’s Bootcamp Start-up Accelerator
-                      </li>
-                      <li class="entry-bullet entry-content">
-                        Built an app in Swift for customers to order food at restaurants from their phones
-                      </li>
-                      <li class="entry-bullet entry-content">
-                        Received and applied feedback from over ten restaurants in Greater Los Angeles Area
-                      </li>
-                  </ul>
-                </td>
-              </tr>
-
-              <!-- Tap -->
-              <tr>
-                  <td class="entry-title entry-header">
-                      Tap
-                  </td>
-                  <td class="entry-location entry-header">
-                      April 2017
-                  </td>
-              </tr>
-              <tr> 
-                <td>
-                  <ul>
-                      <li class="entry-bullet entry-content">
-                        Grand Prize Winner at LA Hacks 2017
-                      </li>
-                      <li class="entry-bullet entry-content">
-                        Conceptualized and constructed a device that turns any surface into a touch screen for any device using piezoelectric sensors, an Arduino, and multilateration code written in C++
-                      </li>
-                      <li class="entry-bullet entry-content">
-                        Competed against over 1000 graduate and undergraduate university students as a Junior in high school
-                      </li>
-                  </ul>
-                </td>
-              </tr>
+        <!-- Boeing Design Challenge -->
+        <div class="entry-info-right" id='boeing-info'>
+          <table class="section-table">
+            <tr>
+              <td class="entry-title entry-header">
+                Boeing Design Challenge
+              </td>
+              <td class="entry-location entry-header">
+                February 2019
+              </td>
+            </tr>
+            <tr> 
+              <td>
+                <ul>
+                  <li class="entry-bullet entry-content">
+                    1 of 5 finalists out of 40 teams
+                  </li>
+                  <li class="entry-bullet entry-content">
+                    Designed a plan for a spacecraft to retrieve an asteroid in 90 minutes and presented in front of Boeing VPs
+                  </li>
+                </ul>
+              </td>
+            </tr>
           </table>
+        </div>
+
+        <!-- Makers -->
+        <div class="entry-info-right" id='makers-info'>
+          <table class="section-table">
+            <tr>
+              <td class="entry-title entry-header">
+                Makers
+              </td>
+              <td class="entry-location entry-header">
+                Jan 2019 – Present
+              </td>
+            </tr>
+            <tr>
+              <td class="entry-position entry-content">
+                Project Manager
+              </td>
+            </tr>
+            <tr> 
+              <td>
+                <ul>
+                  <li class="entry-bullet entry-content">
+                    Partnered with other members to design, build, and pitch to investors a smart mirror called Magic Mirror
+                  <li class="entry-bullet entry-content">
+                    Programmed <span class="language api">Microsoft Face API</span> integration for Magic Mirror, in <span class="language javascript">Javascript</span>, allowing users to log into customized profiles using facial recognition
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- TAMID -->
+        <div class="entry-info-left" id='tamid-info'>
+          <table class="section-table">
+            <tr>
+              <td class="entry-title entry-header">
+                TAMID Group: Business in Israel
+              </td>
+              <td class="entry-location entry-header">
+                Jan 2019 – Present
+              </td>
+            </tr>
+            <tr>
+              <td class="entry-position entry-content">
+                Director of Logistics for TAMID Tank
+              </td>
+            </tr>
+            <tr> 
+              <td>
+                <ul>
+                  <li class="entry-bullet entry-content">
+                    Coordinated “Shark Tank” type event, securing over $12,000 in funding and recruiting USC start-ups while networking to convince VIPs to speak at the event and serve as panelists
+                  <li class="entry-bullet entry-content">
+                    Consulted for Farm Dog, an Israeli startup, by analyzing competitors’ financial statements and corporate history to forecast vulnerable market share
+                  </li>
+                </ul>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
 
-        <!-- Leadership -->
-      <div id="leadership-container" class="section-container" name="leadership">
-          <table id="leadership" class="section-table">
-              <tr>
-                  <td class="section-header">
-                      Leadership
-                  </td>
-              </tr>
 
-              <!-- Makers -->
-              <tr>
-                  <td class="entry-title entry-header">
-                      Makers
-                  </td>
-                  <td class="entry-location entry-header">
-                      Jan 2019 – Present
-                  </td>
-              </tr>
-              <tr>
-                  <td class="entry-position entry-content">
-                      Project Manager
-                  </td>
-              </tr>
-              <tr> 
-                <td>
-                  <ul>
-                      <li class="entry-bullet entry-content">
-                        Partnered with other members to design, build, and pitch to investors a smart mirror called Magic Mirror
-                      <li class="entry-bullet entry-content">
-                        Programmed Microsoft Face API integration for Magic Mirror, in Javascript, allowing users to log into customized profiles using facial recognition
-                      </li>
-                  </ul>
-                </td>
-              </tr>
 
-              <!-- TAMID -->
-              <tr>
-                  <td class="entry-title entry-header">
-                      TAMID Group: Business in Israel
-                  </td>
-                  <td class="entry-location entry-header">
-                      Jan 2019 – Present
-                  </td>
-              </tr>
-              <tr>
-                  <td class="entry-position entry-content">
-                      Director of Logistics for TAMID Tank
-                  </td>
-              </tr>
-              <tr> 
-                <td>
-                  <ul>
-                      <li class="entry-bullet entry-content">
-                        Coordinated “Shark Tank” type event, securing over $12000 in funding and recruiting USC start-ups while networking to convince VIPs to speak at the event and serve as panelists
-                      <li class="entry-bullet entry-content">
-                        Consulted for Farm Dog, an Israeli startup, by analyzing competitors’ financial statements and corporate history to forecast vulnerable market share
-                      </li>
-                  </ul>
-                </td>
-              </tr>
-          </table>
+
+      <!-- Signature -->
+      <div id="footer">
+        <div id="signature">
+          Created from scratch by Max Friedman
+        </div>
       </div>
     </div>
   </body>
