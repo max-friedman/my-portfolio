@@ -20,43 +20,43 @@ function typewriter() {
   if (i < txt.length) {
     if(txt.charAt(i) === "/") {
       document.getElementById("greeting").innerHTML += '<br>';
-      } else {
-        document.getElementById("greeting").innerHTML += txt.charAt(i);
-      }
-      ++i;
-      setTimeout(typewriter, speed);
-   } else {
-       fadeIn('header');
-   }
+    } else {
+      document.getElementById("greeting").innerHTML += txt.charAt(i);
+    }
+    ++i;
+    setTimeout(typewriter, speed);
+  } else {
+    fadeIn('header');
+  }
 }
 
 var cursorAppear = true;
 function cursorBlink() {    
   if (cursorAppear) {
-      document.getElementById("cursor").style.color = "black";
+    document.getElementById("cursor").style.color = "black";
   } else {
-      document.getElementById("cursor").style.color = "#f4efef";
+    document.getElementById("cursor").style.color = "#f4efef";
   }
   cursorAppear = !cursorAppear;
   setTimeout(cursorBlink, speed*10);
 }
 
 
-function fadeIn(fadeId){
+function fadeIn(fadeId) {
   document.getElementById(fadeId).style.display = "";
   document.getElementById(fadeId).style.opacity -= '-.01';
 
   if(document.getElementById(fadeId).style.opacity < "1"){
     setTimeout(function(){fadeIn(fadeId)}, 10);
-    }
+  }
 }
 
-function fadeOut(fadeId){
+function fadeOut(fadeId) {
   document.getElementById(fadeId).style.opacity -= '.01';
 
   if(document.getElementById(fadeId).style.opacity > "0"){
-      setTimeout(function(){fadeOut(fadeId)}, 10);
-    } else {
+    setTimeout(function(){fadeOut(fadeId)}, 10);
+  } else {
     document.getElementById(fadeId).style.display = "none";
-    }  
+  }  
 }
