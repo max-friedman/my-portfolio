@@ -27,6 +27,7 @@ function typewriter() {
     setTimeout(typewriter, speed);
   } else {
     fadeIn('header');
+    fadeIn('header-container');
   }
 }
 
