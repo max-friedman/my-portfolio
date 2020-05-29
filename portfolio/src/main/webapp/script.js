@@ -27,15 +27,16 @@ function typewriter() {
     setTimeout(typewriter, speed);
   } else {
     fadeIn('header');
+    fadeIn('header-container');
   }
 }
 
 var cursorAppear = true;
 function cursorBlink() {    
   if (cursorAppear) {
-    document.getElementById("cursor").style.color = "black";
+    document.getElementById("cursor").style.color = "#839496";
   } else {
-    document.getElementById("cursor").style.color = "#f4efef";
+    document.getElementById("cursor").style.color = "#002b36";
   }
   cursorAppear = !cursorAppear;
   setTimeout(cursorBlink, speed*10);
