@@ -26,7 +26,7 @@ import com.google.gson.*;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-ArrayList<String> comments = new ArrayList<String>();
+  ArrayList<String> comments = new ArrayList<String>();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -37,8 +37,8 @@ ArrayList<String> comments = new ArrayList<String>();
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
     comments.add(request.getParameter("message"));
+    response.setContentType("text/html;");
     
     response.sendRedirect("/index.html");
   }
