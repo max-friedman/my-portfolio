@@ -39,7 +39,7 @@
       });
     </script>
   </head>
-  <body onload="typewriter(); cursorBlink();">
+  <body onload="typewriter(); cursorBlink(); getComments();">
     <div id="content">
 
       <div id="header-container" class="fadein">
@@ -614,6 +614,15 @@
           Created from scratch by Max Friedman
         </div>
       </div>
+
+      <form action="/data" method="POST">
+        <label for="message">Comment:</label></br>
+        <input type="text" id="message" name="message">
+      </form>
+
+      <div id="comment-section">
+      </div>
+
     </div>
   </body>
 </html>

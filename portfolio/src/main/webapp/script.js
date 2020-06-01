@@ -61,3 +61,13 @@ function fadeOut(fadeId) {
     document.getElementById(fadeId).style.display = "none";
   }  
 }
+
+async function getComments() {
+  fetch('/data')
+    .then(response => response.json())
+      .then((jsonObject) => {
+        for(var i = 0; i < jsonObject.length; ++i) {
+          document.getElementById('comment-section').innerHTML += '<p>'+jsonObject[i]+'</p>';
+        }
+      });
+}
