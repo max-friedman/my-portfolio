@@ -48,7 +48,7 @@ public class DataServlet extends HttpServlet {
 
     ArrayList<Comment> comments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
-      if(comments.size() >= numComments) {
+      if (comments.size() >= numComments) {
         break;
       }
 
@@ -67,10 +67,10 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    long timestamp = System.currentTimeMillis();
     String name = request.getParameter("name");
     String message = request.getParameter("message");
-    long timestamp = System.currentTimeMillis();
-
+    
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("name", name);
     commentEntity.setProperty("message", message);
