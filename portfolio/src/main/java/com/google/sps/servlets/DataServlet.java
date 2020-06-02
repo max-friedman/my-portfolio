@@ -19,6 +19,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;  
+import java.util.Date;
 import java.util.ArrayList;
 import com.google.gson.*;
 import com.google.appengine.api.datastore.DatastoreService;
@@ -55,7 +57,7 @@ public class DataServlet extends HttpServlet {
       long id = entity.getKey().getId();
       String name = (String) entity.getProperty("name");
       String message = (String) entity.getProperty("message");
-      long timestamp = (long) entity.getProperty("timestamp");
+      String timestamp = formatTimestamp((long) entity.getProperty("timestamp"));
 
       comments.add(new Comment(id, name, message, timestamp));
     }
@@ -83,13 +85,18 @@ public class DataServlet extends HttpServlet {
     
     response.sendRedirect("/index.html");
   }
+
+  private String formatTimestamp(long millis) {
+    SimpleDateFormat sdf = new SimpleDateFormat("MMM d, YYYY 'at' hh:mm aaa");
+    return sdf.format(millis);
+  }
 }
 
 class Comment {
-  String name, message;
-  long id, timestamp;
+  String name, message, timestamp;
+  long id;
 
-  public Comment(long id, String name, String message, long timestamp) {
+  public Comment(long id, String name, String message, String timestamp) {
     this.message = message;
     this.timestamp = timestamp;
     this.id = id;
