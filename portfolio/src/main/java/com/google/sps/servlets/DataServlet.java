@@ -29,36 +29,25 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/data")
+@WebServlet("/delete-data")
 public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
-
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    PreparedQuery results = datastore.prepare(query);
-
-    ArrayList<Comment> comments = new ArrayList<>();
-    for (Entity entity : results.asIterable()) {
-      long id = entity.getKey().getId();
-      String message = (String) entity.getProperty("message");
-      long timestamp = (long) entity.getProperty("timestamp");
-
-      comments.add(new Comment(id, message, timestamp));
-    }
     
     response.setContentType("text/html;");
-    String json = new Gson().toJson(comments);
-    response.getWriter().println(json);
+
+    response.sendRedirect("/index.html");
   }
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String name = request.getParameter("name");
     String message = request.getParameter("message");
     long timestamp = System.currentTimeMillis();
 
     Entity commentEntity = new Entity("Comment");
+    commentEntity.setProperty("name", name);
     commentEntity.setProperty("message", message);
     commentEntity.setProperty("timestamp", timestamp);
 
@@ -68,16 +57,5 @@ public class DataServlet extends HttpServlet {
     response.setContentType("text/html;");
     
     response.sendRedirect("/index.html");
-  }
-}
-
-class Comment {
-  String message;
-  long id, timestamp;
-
-  public Comment(long id, String message, long timestamp) {
-    this.message = message;
-    this.timestamp = timestamp;
-    this.id = id;
   }
 }

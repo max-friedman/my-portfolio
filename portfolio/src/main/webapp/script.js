@@ -62,12 +62,13 @@ function fadeOut(fadeId) {
   }  
 }
 
-async function getComments() {
-  fetch('/data')
+async function getComments(limit) {
+  fetch('/data?number-comments='+limit)
     .then(response => response.json())
       .then((jsonObject) => {
+        document.getElementById('comments').innerHTML = "";
         for(var i = 0; i < jsonObject.length; ++i) {
-          document.getElementById('comment-section').innerHTML += '<p>'+jsonObject[i].timestamp+": " +jsonObject[i].message+'</p>';
+          document.getElementById('comments').innerHTML += '<p>('+jsonObject[i].timestamp+') '+jsonObject[i].name+': ' +jsonObject[i].message+'</p>';
         }
       });
 }
