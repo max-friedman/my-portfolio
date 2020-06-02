@@ -39,7 +39,7 @@
       });
     </script>
   </head>
-  <body onload="typewriter(); cursorBlink(); getComments();">
+  <body onload="typewriter(); cursorBlink(); getComments(5);">
     <div id="content">
 
       <div id="header-container" class="fadein">
@@ -615,12 +615,25 @@
         </div>
       </div>
 
-      <form action="/data" method="POST">
-        <label for="message">Comment:</label></br>
-        <input type="text" id="message" name="message">
-      </form>
-
       <div id="comment-section">
+        <form action="/data" method="POST">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name">
+          <label for="message">Comment:</label>
+          <input type="text" id="message" name="message">
+          <input type="submit" value="Submit"> 
+        </form>
+
+        <select name="number-comments" id="number-comments" onchange="getComments(this.value);">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+        </select>
+         
+        <div id="comments">
+          
+        </div>
       </div>
 
     </div>
