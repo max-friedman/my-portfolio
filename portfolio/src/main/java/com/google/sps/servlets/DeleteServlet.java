@@ -29,18 +29,16 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/data")
-public class DataServlet extends HttpServlet {
+@WebServlet("/delete-data")
+public class DeleteServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    int numComments;
-    try {
-      numComments = Integer.parseInt(request.getParameter("number-comments"));
-    } catch(Exception e) {
-      numComments = 5;
-    }
-    
+  
+  }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -48,51 +46,10 @@ public class DataServlet extends HttpServlet {
 
     ArrayList<Comment> comments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
-      if(comments.size() >= numComments) {
-        break;
-      }
-
-      long id = entity.getKey().getId();
-      String name = (String) entity.getProperty("name");
-      String message = (String) entity.getProperty("message");
-      long timestamp = (long) entity.getProperty("timestamp");
-
-      comments.add(new Comment(id, name, message, timestamp));
+      datastore.delete(entity.getKey());
     }
     
     response.setContentType("text/html;");
-    String json = new Gson().toJson(comments);
-    response.getWriter().println(json);
-  }
-
-  @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String name = request.getParameter("name");
-    String message = request.getParameter("message");
-    long timestamp = System.currentTimeMillis();
-
-    Entity commentEntity = new Entity("Comment");
-    commentEntity.setProperty("name", name);
-    commentEntity.setProperty("message", message);
-    commentEntity.setProperty("timestamp", timestamp);
-
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    datastore.put(commentEntity);
-
-    response.setContentType("text/html;");
-    
     response.sendRedirect("/index.html");
-  }
-}
-
-class Comment {
-  String name, message;
-  long id, timestamp;
-
-  public Comment(long id, String name, String message, long timestamp) {
-    this.message = message;
-    this.timestamp = timestamp;
-    this.id = id;
-    this.name = name;
   }
 }

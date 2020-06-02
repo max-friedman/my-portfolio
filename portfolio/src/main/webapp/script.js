@@ -72,3 +72,11 @@ async function getComments(limit) {
         }
       });
 }
+
+async function deleteComments() {
+  await fetch('/delete-data', {
+    method: 'POST'
+  });
+  console.log('test');
+  window.location.href = window.location.href;
+}
