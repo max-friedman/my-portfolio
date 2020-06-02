@@ -29,15 +29,43 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/delete-data")
+@WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    int numComments;
+    try {
+      numComments = Integer.parseInt(request.getParameter("number-comments"));
+    } catch(Exception e) {
+      numComments = 5;
+      System.out.println(request.getParameter("number-comments"));
+      System.out.println(request.getParameter("authuser"));
+      System.out.println(request.getQueryString());
+    }
+    
+    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+
+    ArrayList<Comment> comments = new ArrayList<>();
+    for (Entity entity : results.asIterable()) {
+      if(comments.size() >= numComments) {
+        break;
+      }
+
+      long id = entity.getKey().getId();
+      String name = (String) entity.getProperty("name");
+      String message = (String) entity.getProperty("message");
+      long timestamp = (long) entity.getProperty("timestamp");
+
+      comments.add(new Comment(id, name, message, timestamp));
+    }
     
     response.setContentType("text/html;");
-
-    response.sendRedirect("/index.html");
+    String json = new Gson().toJson(comments);
+    response.getWriter().println(json);
   }
 
   @Override
@@ -57,5 +85,17 @@ public class DataServlet extends HttpServlet {
     response.setContentType("text/html;");
     
     response.sendRedirect("/index.html");
+  }
+}
+
+class Comment {
+  String name, message;
+  long id, timestamp;
+
+  public Comment(long id, String name, String message, long timestamp) {
+    this.message = message;
+    this.timestamp = timestamp;
+    this.id = id;
+    this.name = name;
   }
 }
