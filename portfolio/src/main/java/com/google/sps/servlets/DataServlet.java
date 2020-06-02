@@ -51,7 +51,7 @@ public class DataServlet extends HttpServlet {
 
     ArrayList<Comment> comments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
-      if(comments.size() >= numComments) {
+      if (comments.size() >= numComments) {
         break;
       }
 
