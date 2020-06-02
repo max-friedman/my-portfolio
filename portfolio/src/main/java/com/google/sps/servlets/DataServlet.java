@@ -70,10 +70,10 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    long timestamp = System.currentTimeMillis();
     String name = request.getParameter("name");
     String message = request.getParameter("message");
-    long timestamp = System.currentTimeMillis();
-
+    
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("name", name);
     commentEntity.setProperty("message", message);
