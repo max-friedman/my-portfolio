@@ -216,6 +216,7 @@
   padding-left: 5vw;
   padding-right: 5vw;
   font-size: 24px;
+  display: none;
 }
 
 #comment-table {
@@ -265,4 +266,15 @@
   border-radius: 5px;
   height: 20px;
   margin-left: 2px;
+}
+
+#user-container {
+  width: 100%;
+  padding: 2vw 5vw 2vw 5vw;
+  font-size: 24px;
+  color: #839496;
+}
+
+#user-container a {
+  color: inherit;
 }
