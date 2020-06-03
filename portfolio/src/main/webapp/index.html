@@ -616,24 +616,36 @@
       </div>
 
       <div id="comment-section">
-        <form action="/data" method="POST">
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name">
-          <label for="message">Comment:</label>
-          <input type="text" id="message" name="message">
-          <input type="submit" value="Submit"> 
-        </form>
+        <table id="comment-table">
+          <tr>
+            <td id="comment-entry">
+              <form id="comment-form" action="/data" method="POST">
+                <input type="text" id="name" name="name" placeholder="Name">
+                <input type="textarea" id="message" name="message" placeholder="Message...">
+                <input type="submit" value="Submit" style="padding: 0px 10px 0px 10px"> 
+              </form>
+            </td>
+            <td id="comment-limit" align="right">
+              <label for="number-comments">Comments shown: </label>
+              <select name="number-comments" id="number-comments" onchange="getComments(this.value);">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div id="comments">
+            
+              </div>
+            </td>
+          </tr>
+        </table>
 
-        <select name="number-comments" id="number-comments" onchange="getComments(this.value);">
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="15">15</option>
-          <option value="20">20</option>
-        </select>
-         
-        <div id="comments">
-          
-        </div>
+        
+        <button id="delete-comments" onclick="deleteComments()" style="padding: 0px 10px 0px 10px">Delete Comments</button>
       </div>
 
     </div>

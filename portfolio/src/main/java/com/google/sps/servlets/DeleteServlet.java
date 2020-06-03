@@ -19,8 +19,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.text.SimpleDateFormat;  
-import java.util.Date;
 import java.util.ArrayList;
 import com.google.gson.*;
 import com.google.appengine.api.datastore.DatastoreService;
@@ -31,18 +29,16 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/data")
-public class DataServlet extends HttpServlet {
+@WebServlet("/delete-data")
+public class DeleteServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    int numComments;
-    try {
-      numComments = Integer.parseInt(request.getParameter("number-comments"));
-    } catch(Exception e) {
-      numComments = 5;
-    }
-    
+  
+  }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -50,56 +46,10 @@ public class DataServlet extends HttpServlet {
 
     ArrayList<Comment> comments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
-      if (comments.size() >= numComments) {
-        break;
-      }
-
-      long id = entity.getKey().getId();
-      String name = (String) entity.getProperty("name");
-      String message = (String) entity.getProperty("message");
-      String timestamp = formatTimestamp((long) entity.getProperty("timestamp"));
-
-      comments.add(new Comment(id, name, message, timestamp));
+      datastore.delete(entity.getKey());
     }
     
     response.setContentType("text/html;");
-    String json = new Gson().toJson(comments);
-    response.getWriter().println(json);
-  }
-
-  @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    long timestamp = System.currentTimeMillis();
-    String name = request.getParameter("name");
-    String message = request.getParameter("message");
-    
-    Entity commentEntity = new Entity("Comment");
-    commentEntity.setProperty("name", name);
-    commentEntity.setProperty("message", message);
-    commentEntity.setProperty("timestamp", timestamp);
-
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    datastore.put(commentEntity);
-
-    response.setContentType("text/html;");
-    
     response.sendRedirect("/index.html");
-  }
-
-  private String formatTimestamp(long millis) {
-    SimpleDateFormat sdf = new SimpleDateFormat("MMM d, YYYY 'at' hh:mm aaa");
-    return sdf.format(millis);
-  }
-}
-
-class Comment {
-  String name, message, timestamp;
-  long id;
-
-  public Comment(long id, String name, String message, String timestamp) {
-    this.message = message;
-    this.timestamp = timestamp;
-    this.id = id;
-    this.name = name;
   }
 }
