@@ -79,3 +79,18 @@ async function deleteComments() {
   });
   window.location.href = window.location.href;
 }
+
+async function generateUserURL() {
+  await fetch('/user')
+    .then(response => response.json())
+      .then((jsonObject) => {
+        if(jsonObject[0] === 'true') {
+          document.getElementById('user-container').innerHTML = "<p>Logout <a href=\"" + jsonObject[1] + "\">here</a>.</p>";
+          document.getElementById('comment-section').style.display = "block";
+          document.getElementById('name').value = jsonObject[2];
+        } else {
+          document.getElementById('user-container').innerHTML = "<p> <a href=\"" + jsonObject[1] + "\">Log In</a> to comment.</p>";
+          document.getElementById('comment-section').style.display = "none";
+        }
+      });
+}
