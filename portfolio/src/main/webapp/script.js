@@ -68,7 +68,7 @@ async function getComments(limit) {
       .then((jsonObject) => {
         document.getElementById('comments').innerHTML = "";
         for(var i = 0; i < jsonObject.length; ++i) {
-          document.getElementById('comments').innerHTML += '<p>('+jsonObject[i].timestamp+') '+jsonObject[i].name+': ' +jsonObject[i].message+'</p>';
+          document.getElementById('comments').innerHTML += '<p>('+jsonObject[i].timestamp+') '+jsonObject[i].name+': ' +jsonObject[i].message+' ('+jsonObject[i].sentiment+')</p>';
         }
       });
 }
