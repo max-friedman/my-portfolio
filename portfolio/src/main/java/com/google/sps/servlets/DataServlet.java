@@ -29,6 +29,9 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.cloud.language.v1.Document;
+import com.google.cloud.language.v1.LanguageServiceClient;
+import com.google.cloud.language.v1.Sentiment;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
@@ -58,8 +61,9 @@ public class DataServlet extends HttpServlet {
       String name = (String) entity.getProperty("name");
       String message = (String) entity.getProperty("message");
       String timestamp = formatTimestamp((long) entity.getProperty("timestamp"));
+      String sentiment = (String) entity.getProperty("sentiment");
 
-      comments.add(new Comment(id, name, message, timestamp));
+      comments.add(new Comment(id, name, message, timestamp, sentiment));
     }
     
     response.setContentType("text/html;");
@@ -73,10 +77,19 @@ public class DataServlet extends HttpServlet {
     String name = request.getParameter("name");
     String message = request.getParameter("message");
     
+    Document doc =
+        Document.newBuilder().setContent(message).setType(Document.Type.PLAIN_TEXT).build();
+    LanguageServiceClient languageService = LanguageServiceClient.create();
+    Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
+    float score = sentiment.getScore();
+    String sentimentString = String.valueOf(score);
+    languageService.close();
+
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("name", name);
     commentEntity.setProperty("message", message);
     commentEntity.setProperty("timestamp", timestamp);
+    commentEntity.setProperty("sentiment", sentimentString);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
@@ -94,12 +107,14 @@ public class DataServlet extends HttpServlet {
 
 class Comment {
   String name, message, timestamp;
+  String sentiment;
   long id;
 
-  public Comment(long id, String name, String message, String timestamp) {
+  public Comment(long id, String name, String message, String timestamp, String sentiment) {
     this.message = message;
     this.timestamp = timestamp;
     this.id = id;
     this.name = name;
+    this.sentiment = sentiment;
   }
 }
