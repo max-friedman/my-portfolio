@@ -25,7 +25,8 @@ public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     ArrayList<Event> sortedEvents = new ArrayList<Event>(events);
     Collection<TimeRange> freeTimeRanges = new ArrayList<TimeRange>();
-    int end = 0, FULL_DAY = 24*60;;
+    Collection<TimeRange> freeTimeRangesOptional = new ArrayList<TimeRange>();
+    int end = 0, FULL_DAY = 24*60, endMandatory = 0;
     
     Collections.sort(sortedEvents, new Comparator<Event>() {
       @Override public int compare(Event e1, Event e2) {
@@ -46,10 +47,33 @@ public final class FindMeetingQuery {
     }
 
     //If last event doesn't go to the end of the day
-    if(end < FULL_DAY && request.getDuration() < FULL_DAY) {
+    if(end < FULL_DAY && request.getDuration() < FULL_DAY && !request.getAttendees().isEmpty()) {
       freeTimeRanges.add(TimeRange.fromStartEnd(end, FULL_DAY, false));
     }
+
+    // Duplicated for optional
+    end = 0;
+    for(Event e: sortedEvents) {
+      if(!Collections.disjoint(e.getAttendees(), request.getAttendees()) || !Collections.disjoint(e.getAttendees(), request.getOptionalAttendees())) {
+        if(e.getWhen().start() > end && e.getWhen().start()-request.getDuration() >= end) {
+          freeTimeRangesOptional.add(TimeRange.fromStartEnd(end, e.getWhen().start(), false));
+        }
+
+        if(end < e.getWhen().end()) {
+          end = e.getWhen().end();
+        }
+      }
+    }
+
+    //If last event doesn't go to the end of the day
+    if(end < FULL_DAY && request.getDuration() < FULL_DAY) {
+      freeTimeRangesOptional.add(TimeRange.fromStartEnd(end, FULL_DAY, false));
+    }
+    //
     
+    if(!freeTimeRangesOptional.isEmpty()) {
+      return freeTimeRangesOptional;
+    }
     return freeTimeRanges;
   }
 }
