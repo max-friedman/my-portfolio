@@ -18,76 +18,38 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 public final class FindMeetingQuery {
-  int FULL_DAY = 24*60;
-  Boolean[] freeStartTimes = new Boolean[FULL_DAY];
 
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    initializeFreeStartTimes();
-
-    for(Event e: events) {
-      if(!Collections.disjoint(e.getAttendees(), request.getAttendees())) {
-        busy(e, (int)request.getDuration());
-      }
-    }
-
-    return createFreeTimeRanges((int)request.getDuration());
-  }
-
-  private void initializeFreeStartTimes() {
-    Arrays.fill(freeStartTimes, Boolean.TRUE);
-  }
-
-  private void busy(Event e, int duration) {
-    for(int i = (e.getWhen().start()-duration); i < e.getWhen().end(); ++i) {
-      if(i < 0) {
-        i = 0;
-      }
-      if(i==(8*60+30)) {
-        System.out.println(e.getTitle());
-      }
-      freeStartTimes[i] = false;
-    }
-  }
-
-  private Collection<TimeRange> createFreeTimeRanges(int duration) {
+    ArrayList<Event> sortedEvents = new ArrayList<Event>(events);
     Collection<TimeRange> freeTimeRanges = new ArrayList<TimeRange>();
-
-    if(duration > FULL_DAY) {
-      return freeTimeRanges;
-    }
-
-    boolean current = false;
-    int start = -1, end = -1;
-
-    for(int i = 0; i < FULL_DAY; ++i) {
-      if(freeStartTimes[i]) {
-        if(!current) {
-          start = i;
-          current = true;
+    int end = 0, FULL_DAY = 24*60;;
+    
+    Collections.sort(sortedEvents, new Comparator<Event>() {
+      @Override public int compare(Event e1, Event e2) {
+        return TimeRange.ORDER_BY_START.compare(e1.getWhen(), e2.getWhen());
+      }
+    });
+    
+    for(Event e: sortedEvents) {
+      if(!Collections.disjoint(e.getAttendees(), request.getAttendees())) {
+        if(e.getWhen().start() > end && e.getWhen().start()-request.getDuration() >= end) {
+          freeTimeRanges.add(TimeRange.fromStartEnd(end, e.getWhen().start(), false));
         }
-        end = i;
-      } else if(current == true) {
-        freeTimeRanges.add(TimeRange.fromStartEnd(start, end+duration, true));
-        current = false;
-      }
-    }
-    //printFreeStartTimes();
-    if(current == true) {
-      freeTimeRanges.add(TimeRange.fromStartEnd(start, end, true));
-    }
-    return freeTimeRanges;
-  }
 
-  public void printFreeStartTimes() {
-    for(int i = 0; i < FULL_DAY; ++i) {
-      System.out.print(i + ": ");
-      if(freeStartTimes[i]) {
-        System.out.println("TRUE");
-      } else {
-        System.out.println("FALSE");
+        if(end < e.getWhen().end()) {
+          end = e.getWhen().end();
+        }
       }
     }
+
+    //If last event doesn't go to the end of the day
+    if(end < FULL_DAY && request.getDuration() < FULL_DAY) {
+      freeTimeRanges.add(TimeRange.fromStartEnd(end, FULL_DAY, false));
+    }
+    
+    return freeTimeRanges;
   }
 }
