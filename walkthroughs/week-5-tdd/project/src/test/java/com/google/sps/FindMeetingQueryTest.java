@@ -65,7 +65,7 @@ public final class FindMeetingQueryTest {
     Collection<TimeRange> actual = query.query(NO_EVENTS, request);
     Collection<TimeRange> expected = Arrays.asList(TimeRange.WHOLE_DAY);
 
-    Assert.assertEquals(expected, actual);
+    Assert.assertEquals(actual, expected);
   }
 
   @Test
@@ -77,7 +77,7 @@ public final class FindMeetingQueryTest {
     Collection<TimeRange> actual = query.query(NO_EVENTS, request);
     Collection<TimeRange> expected = Arrays.asList();
 
-    Assert.assertEquals(expected, actual);
+    Assert.assertEquals(actual, expected);
   }
 
   @Test
@@ -93,7 +93,7 @@ public final class FindMeetingQueryTest {
         Arrays.asList(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0830AM, false),
             TimeRange.fromStartEnd(TIME_0900AM, TimeRange.END_OF_DAY, true));
 
-    Assert.assertEquals(expected, actual);
+    Assert.assertEquals(actual, expected);
   }
 
   @Test
@@ -120,7 +120,7 @@ public final class FindMeetingQueryTest {
             TimeRange.fromStartEnd(TIME_0830AM, TIME_0900AM, false),
             TimeRange.fromStartEnd(TIME_0930AM, TimeRange.END_OF_DAY, true));
 
-    Assert.assertEquals(expected, actual);
+    Assert.assertEquals(actual, expected);
   }
 
   @Test
@@ -146,7 +146,7 @@ public final class FindMeetingQueryTest {
         Arrays.asList(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0830AM, false),
             TimeRange.fromStartEnd(TIME_1000AM, TimeRange.END_OF_DAY, true));
 
-    Assert.assertEquals(expected, actual);
+    Assert.assertEquals(actual, expected);
   }
 
   @Test
@@ -173,7 +173,7 @@ public final class FindMeetingQueryTest {
         Arrays.asList(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0830AM, false),
             TimeRange.fromStartEnd(TIME_1000AM, TimeRange.END_OF_DAY, true));
 
-    Assert.assertEquals(expected, actual);
+    Assert.assertEquals(actual, expected);
   }
 
   @Test
@@ -198,7 +198,7 @@ public final class FindMeetingQueryTest {
         Arrays.asList(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0830AM, false),
             TimeRange.fromStartEnd(TIME_0930AM, TimeRange.END_OF_DAY, true));
 
-    Assert.assertEquals(expected, actual);
+    Assert.assertEquals(actual, expected);
   }
 
   @Test
@@ -222,7 +222,7 @@ public final class FindMeetingQueryTest {
     Collection<TimeRange> expected =
         Arrays.asList(TimeRange.fromStartDuration(TIME_0830AM, DURATION_30_MINUTES));
 
-    Assert.assertEquals(expected, actual);
+    Assert.assertEquals(actual, expected);
   }
 
   @Test
@@ -236,7 +236,7 @@ public final class FindMeetingQueryTest {
     Collection<TimeRange> actual = query.query(events, request);
     Collection<TimeRange> expected = Arrays.asList(TimeRange.WHOLE_DAY);
 
-    Assert.assertEquals(expected, actual);
+    Assert.assertEquals(actual, expected);
   }
 
   @Test
@@ -247,7 +247,7 @@ public final class FindMeetingQueryTest {
     Collection<TimeRange> actual = query.query(NO_EVENTS, request);
     Collection<TimeRange> expected = Arrays.asList(TimeRange.WHOLE_DAY);
 
-    Assert.assertEquals(expected, actual);
+    Assert.assertEquals(actual, expected);
   }
 
   @Test
@@ -270,7 +270,7 @@ public final class FindMeetingQueryTest {
     Collection<TimeRange> actual = query.query(events, request);
     Collection<TimeRange> expected = Arrays.asList();
 
-    Assert.assertEquals(expected, actual);
+    Assert.assertEquals(actual, expected);
   }
 
   @Test
@@ -301,7 +301,7 @@ public final class FindMeetingQueryTest {
             TimeRange.fromStartEnd(TIME_0830AM, TIME_0900AM, false),
             TimeRange.fromStartEnd(TIME_0930AM, TimeRange.END_OF_DAY, true));
 
-    Assert.assertEquals(expected, actual);
+    Assert.assertEquals(actual, expected);
   }
 
   @Test
@@ -331,7 +331,7 @@ public final class FindMeetingQueryTest {
         Arrays.asList(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0800AM, false),
             TimeRange.fromStartEnd(TIME_0930AM, TimeRange.END_OF_DAY, true));
 
-    Assert.assertEquals(expected, actual);
+    Assert.assertEquals(actual, expected);
   }
 
   @Test
@@ -359,7 +359,7 @@ public final class FindMeetingQueryTest {
     Collection<TimeRange> expected =
         Arrays.asList(TimeRange.fromStartDuration(TIME_0830AM, DURATION_30_MINUTES));
 
-    Assert.assertEquals(expected, actual);
+    Assert.assertEquals(actual, expected);
   }
 
   @Test
@@ -388,7 +388,7 @@ public final class FindMeetingQueryTest {
         TimeRange.fromStartEnd(TIME_0830AM, TIME_0900AM, false),
         TimeRange.fromStartEnd(TIME_0930AM, TimeRange.END_OF_DAY, true));
 
-    Assert.assertEquals(expected, actual);
+    Assert.assertEquals(actual, expected);
   }
 
   @Test
@@ -415,7 +415,7 @@ public final class FindMeetingQueryTest {
     Collection<TimeRange> actual = query.query(events, request);
     Collection<TimeRange> expected = Arrays.asList();
 
-    Assert.assertEquals(expected, actual);
+    Assert.assertEquals(actual, expected);
   }
 }
 
