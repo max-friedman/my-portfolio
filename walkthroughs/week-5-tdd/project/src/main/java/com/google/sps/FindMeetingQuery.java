@@ -26,7 +26,7 @@ public final class FindMeetingQuery {
     ArrayList<Event> sortedEvents = new ArrayList<Event>(events);
     Collection<TimeRange> freeTimeRanges = new ArrayList<TimeRange>();
     Collection<TimeRange> freeTimeRangesWithOptionalAttendee = new ArrayList<TimeRange>();
-    int end = 0, FULL_DAY = 24*60, endMandatory = 0;
+    int endOptional = 0, endMandatory = 0, FULL_DAY = 24*60;
     
     Collections.sort(sortedEvents, new Comparator<Event>() {
       @Override public int compare(Event e1, Event e2) {
@@ -36,44 +36,46 @@ public final class FindMeetingQuery {
     
     for(Event e: sortedEvents) {
       if(!Collections.disjoint(e.getAttendees(), request.getAttendees())) {
-        if(e.getWhen().start() > end && e.getWhen().start()-request.getDuration() >= end) {
-          freeTimeRanges.add(TimeRange.fromStartEnd(end, e.getWhen().start(), false));
+        if(isOverlapping(e, endMandatory, request.getDuration())) {
+          freeTimeRanges.add(TimeRange.fromStartEnd(endMandatory, e.getWhen().start(), false));
         }
 
-        if(end < e.getWhen().end()) {
-          end = e.getWhen().end();
+        if(endMandatory < e.getWhen().end()) {
+          endMandatory = e.getWhen().end();
         }
       }
-    }
 
-    //If last event doesn't go to the end of the day
-    if(end < FULL_DAY && request.getDuration() < FULL_DAY && !request.getAttendees().isEmpty()) {
-      freeTimeRanges.add(TimeRange.fromStartEnd(end, FULL_DAY, false));
-    }
-
-    // Duplicated for optional
-    end = 0;
-    for(Event e: sortedEvents) {
       if(!Collections.disjoint(e.getAttendees(), request.getAttendees()) || !Collections.disjoint(e.getAttendees(), request.getOptionalAttendees())) {
-        if(e.getWhen().start() > end && e.getWhen().start()-request.getDuration() >= end) {
-          freeTimeRangesWithOptionalAttendee.add(TimeRange.fromStartEnd(end, e.getWhen().start(), false));
+        if(isOverlapping(e, endOptional, request.getDuration())) {
+          freeTimeRangesWithOptionalAttendee.add(TimeRange.fromStartEnd(endOptional, e.getWhen().start(), false));
         }
 
-        if(end < e.getWhen().end()) {
-          end = e.getWhen().end();
+        if(endOptional < e.getWhen().end()) {
+          endOptional = e.getWhen().end();
         }
       }
+
+      
     }
 
     //If last event doesn't go to the end of the day
-    if(end < FULL_DAY && request.getDuration() < FULL_DAY) {
-      freeTimeRangesWithOptionalAttendee.add(TimeRange.fromStartEnd(end, FULL_DAY, false));
+    if(endMandatory < FULL_DAY && request.getDuration() < FULL_DAY && !request.getAttendees().isEmpty()) {
+      freeTimeRanges.add(TimeRange.fromStartEnd(endMandatory, FULL_DAY, false));
     }
-    //
+    if(endOptional < FULL_DAY && request.getDuration() < FULL_DAY) {
+      freeTimeRangesWithOptionalAttendee.add(TimeRange.fromStartEnd(endOptional, FULL_DAY, false));
+    }
     
     if(!freeTimeRangesWithOptionalAttendee.isEmpty()) {
       return freeTimeRangesWithOptionalAttendee;
     }
     return freeTimeRanges;
+  }
+
+  private boolean isOverlapping(Event e, int end, long duration) {
+    if(e.getWhen().start() > end && e.getWhen().start()-duration >= end) {
+      return true;
+    }
+    return false;
   }
 }
